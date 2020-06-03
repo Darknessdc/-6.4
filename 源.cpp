@@ -24,18 +24,19 @@ extern const char* myFile = "myGocde.gcode";
 int main()
 {
 	initPrinter();
-	double aa[2];
-	double bb[2];
-	//cout << "Please your START and END POINT"<<endl;
-	//cin >> aa[0]>> aa[1]>> bb[0]>> bb[1];
 
+	//test
 	double temp[2] = {50,70};
 	double temp2[2] = { 70,70 };
+	double temp3[2] = { 190,100 };
+
 	//		点   长度 高度Z 喷嘴 道数 E1比例
-	tiaoWen(temp, 100, 0.2, 0.3,  10,   1);
 	tiaoWen(temp, 90, 0.2, 0.4, 10, 1);
-	tiaoWen2(temp2, 100, 0.2, 0.4, 10, 1);
-	
+	//tiaoWen2(temp2, 100, 0.2, 0.4, 10, 1);
+	//     起点  低的长度  高的长度 低的层高 高的层高 波浪数目 几道波浪 喷嘴直径
+	waves(temp2,5,8,0.1,0.3,5,5,0.4,1);
+
+	waves2(temp3, 8, 8, 0.1, 0.3, 5, 5, 0.4, 1);
 
 
 

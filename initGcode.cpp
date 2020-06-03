@@ -59,6 +59,56 @@ bool tiaoWen2(double PointA[2], int length, double Z, double N, int M, double E1
 	return true;
 }
 
+bool waves(double PointA[2], double lengthOflow, double lengthOfhigh, double Z1, double Z2, int numberOfwaves, int M, double N, double E1)
+{
+	ofstream myGcodefile(myFile, ios_base::app);
+	if (!myGcodefile) return false;
+
+	double tempPoint[2] = { PointA[0],PointA[1] };
+
+	for (int j = 0; j < M; j++)
+	{
+		for (int i = 0; i < numberOfwaves; i++)
+		{
+			myGcodefile << "G1 X" << tempPoint[0] + N * j  << " Y" << tempPoint[1] + (lengthOflow + lengthOfhigh) * i << " Z" << Z1 << endl;
+			sumOfE += E1 * E * lengthOflow * (i + 1);
+			myGcodefile << "G1 X" << tempPoint[0] + N * j << " Y" << tempPoint[1] + (lengthOflow + lengthOfhigh) * i + lengthOflow << " E" << sumOfE << endl;
+
+			myGcodefile << "G1 Z" << Z2 << endl;
+			sumOfE += E1 * E * lengthOfhigh * (i + 1);
+			myGcodefile << "G1 X" << tempPoint[0] + N * j << " Y" << tempPoint[1] + (lengthOflow + lengthOfhigh) * i + lengthOflow + lengthOfhigh << " E" << sumOfE << endl;
+			myGcodefile << "G1 Z" << Z1 << endl;
+		}
+	
+	}
+	return true;
+}
+
+bool waves2(double PointA[2], double lengthOflow, double lengthOfhigh, double Z1, double Z2, int numberOfwaves, int M, double N, double E1)
+{
+	ofstream myGcodefile(myFile, ios_base::app);
+	if (!myGcodefile) return false;
+
+	double tempPoint[2] = { PointA[0],PointA[1] };
+
+	for (int j = 0; j < M; j++)
+	{
+		for (int i = 0; i < numberOfwaves; i++)
+		{
+			myGcodefile << "G1 X" << tempPoint[0] + (lengthOflow + lengthOfhigh) * i << " Y" << tempPoint[1] + N * j << " Z" << Z1 << endl;
+			sumOfE += E1 * E * lengthOflow * (i + 1);
+			myGcodefile << "G1 X" << tempPoint[0] + (lengthOflow + lengthOfhigh) * i + lengthOflow << " Y" << tempPoint[1] + N * j << " E" << sumOfE << endl;
+
+			myGcodefile << "G1 Z" << Z2 << endl;
+			sumOfE += E1 * E * lengthOfhigh * (i + 1);
+			myGcodefile << "G1 X" << tempPoint[0] + (lengthOflow + lengthOfhigh) * i + lengthOflow + lengthOfhigh << " Y" << tempPoint[1] + N * j << " E" << sumOfE << endl;
+			myGcodefile << "G1 Z" << Z1 << endl;
+		}
+
+	}
+	return true;
+}
+
 bool printWireframe(double PointA[2], double PointB[2])
 {
 

@@ -16,5 +16,7 @@ bool printWireframe(double Pointa[2],double Pointb[2]);
 bool tiaoWen(double PointA[2], int length, double Z, double N, int M, double E1);
 //打印横条纹需要起点，长度，高度Z，喷嘴直径N，数量M，挤出机E
 bool tiaoWen2(double PointA[2], int length, double Z, double N, int M, double E1);
-//打印波浪纹
-bool waves(double PointA[2],double lengthOflow,double lengthOfhigh,double Z,int M,int numberOfwaves);
+//打印波浪竖纹      起点               低的长度            高的长度      低的层高     高的层高    波浪数目         几道波浪
+bool waves(double PointA[2], double lengthOflow, double lengthOfhigh, double Z1, double Z2, int numberOfwaves, int M, double N, double E1);
+//波浪横纹
+bool waves2(double PointA[2], double lengthOflow, double lengthOfhigh, double Z1, double Z2, int numberOfwaves, int M, double N, double E1);
