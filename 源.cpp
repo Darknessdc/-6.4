@@ -19,6 +19,7 @@ int M = 5;
 double H1 = 0.1;
 double H2 = 0.2;
 extern const double E = 0.038;
+extern const char* myFile = "myGocde.gcode";
 
 int main()
 {
@@ -28,7 +29,19 @@ int main()
 	//cout << "Please your START and END POINT"<<endl;
 	//cin >> aa[0]>> aa[1]>> bb[0]>> bb[1];
 
-	double temp[2] = {50,20};
-	tiaoWen(temp,100,0.2,0.4,5,1);
+	double temp[2] = {50,70};
+	double temp2[2] = { 70,70 };
+	//		点   长度 高度Z 喷嘴 道数 E1比例
+	tiaoWen(temp, 100, 0.2, 0.3,  10,   1);
+	tiaoWen(temp, 90, 0.2, 0.4, 10, 1);
+	tiaoWen2(temp2, 100, 0.2, 0.4, 10, 1);
+	
+
+
+
+	//最后加上去两句，不然切片软件显示都是黑色的线，软件时simplify3d
+	ofstream myGcodefile(myFile, ios_base::app);
+	myGcodefile << "G0 F1000 X249.2 Y249.2"<<endl<<"G0 F9000 X249.6 Y249.6";
+
 	printWireframe(aa,bb);
 }

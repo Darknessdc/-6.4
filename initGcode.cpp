@@ -3,11 +3,10 @@
 
 using namespace std;
 
-const char* myFile = "myGocde.gcode";
+
 
 bool initPrinter()
 {
-
 	ofstream myGcodefile(myFile);
 	if (!myGcodefile) return false;
 
@@ -36,6 +35,27 @@ bool tiaoWen(double PointA[2],int length,double Z,double N, int M, double E1)
 		sumOfE += E1*E*length;
 		myGcodefile << "G1 X" << tempPoint[0]+N*(i+1) << " Y"<< tempPoint[1] << " E" << sumOfE << endl;
 	}
+	return true;
+}
+
+bool tiaoWen2(double PointA[2], int length, double Z, double N, int M, double E1)
+{
+	ofstream myGcodefile(myFile, ios_base::app);
+	if (!myGcodefile) return false;
+	myGcodefile << "G0 F5000 " << " Z" << Z << endl;
+
+	double tempPoint[2] = { PointA[0],PointA[1] };
+
+	for (int i = 0; i < M; i++)
+	{
+		myGcodefile << "G1 X" << tempPoint[0]  << " Y" << tempPoint[1] + N * i << endl;
+		sumOfE += E1 * E*length;
+		myGcodefile << "G1 X" << tempPoint[0] + length << " Y" << tempPoint[1] + N * i << " E" << sumOfE << endl;
+		myGcodefile << "G1 X" << tempPoint[0] + length  << " Y" << tempPoint[1] + N * (i + 1) << " E" << sumOfE << endl;
+		sumOfE += E1 * E*length;
+		myGcodefile << "G1 X" << tempPoint[0]  << " Y" << tempPoint[1] + N * (i + 1) << " E" << sumOfE << endl;
+	}
+
 	return true;
 }
 
