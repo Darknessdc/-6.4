@@ -31,18 +31,18 @@ int main()
 	double temp3[2] = { 190,100 };
 
 	//		点   长度 高度Z 喷嘴 道数 E1比例
-	tiaoWen(temp, 90, 0.2, 0.4, 10, 1);
-	//tiaoWen2(temp2, 100, 0.2, 0.4, 10, 1);
+	//tiaoWen(temp, 90, 0.2, 0.4, 3, 1);
+	//tiaoWen2(temp2, 100, 0.2, 0.4, 3, 1);
 	//     起点  低的长度  高的长度 低的层高 高的层高 波浪数目 几道波浪 喷嘴直径
-	waves(temp2,5,8,0.1,0.3,5,5,0.4,1);
+	//waves(temp2,5,8,0.1,0.3,5,5,0.4,1);
 
-	waves2(temp3, 8, 8, 0.1, 0.3, 5, 5, 0.4, 1);
-
-
+	//waves2(temp3, 8, 8, 0.1, 0.3, 5, 5, 0.4, 1);
+	//起点，长宽高，填充条纹数*2，喷嘴
+	cube(temp2,30,30,20,4,0.4);
 
 	//最后加上去两句，不然切片软件显示都是黑色的线，软件时simplify3d
 	ofstream myGcodefile(myFile, ios_base::app);
 	myGcodefile << "G0 F1000 X249.2 Y249.2"<<endl<<"G0 F9000 X249.6 Y249.6";
 
-	printWireframe(aa,bb);
+	//printWireframe(aa,bb);
 }

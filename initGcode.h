@@ -10,7 +10,7 @@ extern  double sumOfE;
 extern const char* myFile;
 
 bool initPrinter();
-bool printWireframe(double Pointa[2],double Pointb[2]);
+bool printWireframe(const double PointA[2],double a,double b,double c);
 
 //打印单一竖条纹需要起始点，长度，高度Z，喷嘴直径N，数量M，挤出机E E还可能与Z有关
 bool tiaoWen(double PointA[2], int length, double Z, double N, int M, double E1);
@@ -20,3 +20,5 @@ bool tiaoWen2(double PointA[2], int length, double Z, double N, int M, double E1
 bool waves(double PointA[2], double lengthOflow, double lengthOfhigh, double Z1, double Z2, int numberOfwaves, int M, double N, double E1);
 //波浪横纹
 bool waves2(double PointA[2], double lengthOflow, double lengthOfhigh, double Z1, double Z2, int numberOfwaves, int M, double N, double E1);
+//用编织填充任意长宽高的立方体
+void cube(double PointA[2], double a,double b, double c, int M, double N);
