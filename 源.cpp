@@ -27,7 +27,7 @@ int main()
 
 	//test
 	double temp[2] = {50,70};
-	double temp2[2] = { 70,70 };
+	double temp2[2] = { 100,100 };
 	double temp3[2] = { 190,100 };
 
 	//		点   长度 高度Z 喷嘴 道数 E1比例
@@ -38,7 +38,7 @@ int main()
 
 	//waves2(temp3, 8, 8, 0.1, 0.3, 5, 5, 0.4, 1);
 	//起点，长宽高，填充条纹数*2，喷嘴
-	cube(temp2,30,30,20,4,0.4);
+	cube(temp2,100,40,8,3,0.4);
 
 	//最后加上去两句，不然切片软件显示都是黑色的线，软件时simplify3d
 	ofstream myGcodefile(myFile, ios_base::app);

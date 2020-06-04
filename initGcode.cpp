@@ -117,17 +117,21 @@ bool waves2(double PointA[2], double lengthOflow, double lengthOfhigh, double Z1
 	}
 	return true;
 }
-//起点，长宽高abc，小条纹数量M*2，喷嘴N
+//起点，长宽高abc，M是填充模式决定了tiaowen 和waves的小条纹数量，一个是2*M,另一个是M，喷嘴N
 void cube(double PointA[2], double a, double b, double c,int M, double N)
 {
 	double tempPoint[2] = { PointA[0],PointA[1] };
 	double width = M * N * 2;
-	//大竖条纹数量
+	//大竖条纹数量,长的等分
 	int numOftiaowen = a / width / 2;
-	double tempZ = H1;
-
+	int numOfz = c / (3*H1);
+	double tempZ = 0;
+	double tempZ2 = 0;
+	double tempZ3 = 0;
+	
 	//第一道纹为空，参考论文，这是第二道纹，都是偶数纹,第一层
-	printWireframe(tempPoint, a, b, tempZ);
+	tempZ = H1;
+	printWireframe(tempPoint, a, b, H1);
 	for (int i = 0; i < numOftiaowen; i++)
 	{
 		//最后+N为了让第一道和边框的距离合理
@@ -135,33 +139,73 @@ void cube(double PointA[2], double a, double b, double c,int M, double N)
 		double startPointy = tempPoint[1];
 		double startPoint[2] = { startPointx ,startPointy };
 
-		tiaoWen(startPoint, b, tempZ, N, M, 1);
+		tiaoWen(startPoint, b, H1, N, M, 1);
 	}
 
-	//第二层
-	//大横条纹数量
-	int numOftiaowen2 = b / width / 2;
-	printWireframe(tempPoint, a, b, tempZ+ H1);
-	for (int i = 0; i < numOftiaowen2; i++)
+	for (int ii = 0; ii < numOfz; ii++)
 	{
-		double startPointx = tempPoint[0] ;
-		double startPointy = tempPoint[1] + width * ((i * 2) + 1) + N;
-		double startPoint[2] = { startPointx ,startPointy };
-		//+N -N 进行微调
-		waves2(startPoint, width+N, width-N, tempZ, tempZ+ H1, numOftiaowen,M * 2,N,1);
+		//第二层
+		//大横条纹数量，宽的等分
+		int numOftiaowen2 = b / width / 2;
+		tempZ += H1;
+		tempZ2 += H1;
+		printWireframe(tempPoint, a, b, 2 * H1 + 3 * H1*ii);
+		for (int i = 0; i < numOftiaowen2; i++)
+		{
+			double startPointx = tempPoint[0];
+			double startPointy = tempPoint[1] + width * ((i * 2) + 1) + N;
+			double startPoint[2] = { startPointx ,startPointy };
+			//+N -N 进行微调
+			waves2(startPoint, width + N, width - N, H1+3*H1*ii , 2*H1 + 3 * H1*ii, numOftiaowen, M * 2, N, 1);
+		}
+
+		//第三层
+		tempZ3 += H1;
+		tempZ2 += H1;
+		//printWireframe(tempPoint, a, b, tempZ);
+		for (int i = 0; i < numOftiaowen; i++)
+		{
+			double startPointx = tempPoint[0] + width * (i * 2) + N;
+			double startPointy = tempPoint[1];
+			double startPoint[2] = { startPointx ,startPointy };
+			waves(startPoint, width + N, width - N, H1 + 3 * H1*ii, 2 * H1 + 3 * H1*ii, numOftiaowen2, M * 2, N, 1);
+		}
+
+		//第四层
+		tempZ3 += H2;
+		printWireframe(tempPoint, a, b, 3 * H1 + 3 * H1*ii);
+		for (int i = 0; i < numOftiaowen2; i++)
+		{
+			double startPointx = tempPoint[0];
+			double startPointy = tempPoint[1] + width * (i * 2) + N;
+			double startPoint[2] = { startPointx ,startPointy };
+			tiaoWen2(startPoint, a, 3*H1 + 3 * H1*ii, N, M, 1);
+		}
+
+		//第五层
+		tempZ3 += H1;
+		tempZ2 += H1;
+		printWireframe(tempPoint, a, b, 4 * H1 + 3 * H1*ii);
+		for (int i = 0; i < numOftiaowen; i++)
+		{
+			double startPointx = tempPoint[0] + width * ((i * 2) + 1) + N;
+			double startPointy = tempPoint[1];
+			double startPoint[2] = { startPointx ,startPointy };
+			waves(startPoint, width, width, 4*H1 + 3 * H1*ii, 3*H1 + 3 * H1*ii, numOftiaowen2, M * 2, N, 1);
+		}
+
+		//第六层
+		tempZ += H1;
+		//printWireframe(tempPoint, a, b, tempZ + H1 * 2 + H2 + H1 + H1);
+		for (int i = 0; i < numOftiaowen2; i++)
+		{
+			double startPointx = tempPoint[0];
+			double startPointy = tempPoint[1] + width * ((i * 2) + 1) + N;
+			double startPoint[2] = { startPointx ,startPointy };
+			//+N -N 进行微调
+			waves2(startPoint, width + N, width - N, 3 * H1 + 3 * H1*ii, 4 * H1 + 3 * H1*ii, numOftiaowen, M * 2, N, 1);
+		}
 	}
-
-	//第三层
-	printWireframe(tempPoint, a, b, tempZ + H1*2);
-	for (int i = 0; i < numOftiaowen; i++)
-	{
-		double startPointx = tempPoint[0] + width * (i * 2) + N;
-		double startPointy = tempPoint[1];
-		double startPoint[2] = { startPointx ,startPointy };
-		waves(startPoint, width + N, width - N, tempZ, tempZ + H1, numOftiaowen2, M * 2, N, 1);
-	}
-
-
 		
 }
 

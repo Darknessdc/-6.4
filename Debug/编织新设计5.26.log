@@ -1,2 +1,9 @@
-﻿  源.cpp
+﻿  initGcode.cpp
+c:\users\administrator\desktop\编织资料，文献，开题\编织新设计5.26\编织新设计5.26\initgcode.cpp(126): warning C4244: “初始化”: 从“double”转换到“int”，可能丢失数据
+c:\users\administrator\desktop\编织资料，文献，开题\编织新设计5.26\编织新设计5.26\initgcode.cpp(127): warning C4244: “初始化”: 从“double”转换到“int”，可能丢失数据
+c:\users\administrator\desktop\编织资料，文献，开题\编织新设计5.26\编织新设计5.26\initgcode.cpp(142): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+c:\users\administrator\desktop\编织资料，文献，开题\编织新设计5.26\编织新设计5.26\initgcode.cpp(149): warning C4244: “初始化”: 从“double”转换到“int”，可能丢失数据
+c:\users\administrator\desktop\编织资料，文献，开题\编织新设计5.26\编织新设计5.26\initgcode.cpp(182): warning C4244: “参数”: 从“double”转换到“int”，可能丢失数据
+  源.cpp
+  正在生成代码...
   编织新设计5.26.vcxproj -> C:\Users\Administrator\Desktop\编织资料，文献，开题\编织新设计5.26\Debug\编织新设计5.26.exe
