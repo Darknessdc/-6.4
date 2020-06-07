@@ -30,7 +30,7 @@ int main()
 
 	cube(temp2,40,20,8,3,0.4);
 
-	//最后加上去两句，不然切片软件显示都是黑色的线，软件时simplify3d
+	//最后加上去两句，不然切片软件显示都是黑色的线，软件simplify3d
 	ofstream myGcodefile(myFile, ios_base::app);
 	myGcodefile << "G0 F1000 X249.2 Y249.2"<<endl<<"G0 F9000 X249.6 Y249.6";
 
